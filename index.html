@@ -104,7 +104,7 @@
           </tbody>
         </table>
         <p> The data model shown above is expressed in a <a>verifiable credential</a> in the example below. </p>
-        <pre class="example nohighlight" title="Usage of the render property by an issuer">
+        <pre class="example json nohighlight" title="Usage of the render property by an issuer">
 {
   "@context": [
     "https://www.w3.org/ns/credentials/v2",
@@ -122,15 +122,14 @@
       "name": "Bachelor of Science and Arts"
     }
   },
-  
-					<span class="highlight">"renderMethod": [{
+<span class="highlight">"renderMethod": [{
     "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
-    "type": "OverlayCaptureBundle"
-  }]
-  </span>
+    "type": "OverlayCaptureBundle",
+    "overlayTypes": ["information"],
+    "language": ["en", "fr"],
+  }]</span>
 }
-        
-				</pre>
+</pre>
         <p> In the example above, the <a>issuer</a> has provided an OCA Bundle for a bachelor's degree that will provide additional information to the <a>verifiable credential</a>.</p>
       </section>
     </section>
