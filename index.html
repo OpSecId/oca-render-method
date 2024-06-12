@@ -204,9 +204,16 @@
       <section id="algorithms">
          <h2>Algorythms</h2>
          <p>These algorythms instruct how to apply an OCA bundle to a Verifiable Credential.</p>
-         <h3>Transform VC</h3>
-         <p>Transform Verifiable Credential to JSON path array.</p>
-         <pre class="example json" title="Verifiable Credential">
+         <h3>Creating an OCA Bundle</h3>
+	      <h4>Get JSON path array from VC</h4>
+	      <h4>Define the Capture Base attributes</h4>
+	      <h4>Create desired overlays</h4>
+	      <h4>Publish OCA Bundle</h4>
+	      <h4>Add entry to Verifiable Credential</h4>
+         <h3>Applying an OCA Bundle</h3>
+         <h4>Get JSON path array from VC</h4>
+	      <p>An implementer MAY ignore the @context of the VC when genereting the array or remove the corresponding paths.</p>
+<pre class="example json" title="Verifiable Credential">
 {
   "@context": [
     "https://www.w3.org/ns/credentials/v2",
@@ -238,12 +245,7 @@
   ]
 }
 </pre>
-         <pre class="example" title="JSON Paths">
-$
-$["@context"]
-$["@context"][0]
-$["@context"][1]
-$["@context"][2]
+<pre class="example" title="JSON Paths">
 $.id
 $.type
 $.type[0]
@@ -265,9 +267,9 @@ $.renderMethod[0].language
 $.renderMethod[0].language[0]
 $.renderMethod[0].language[1]
 </pre>
-         <h3>Resolve Bundle</h3>
-         <p>Do a GET request on the id to fetch the bundle.</p>
-         <pre class="example json" title="OCA Bundle">
+         <h4>Resolve Bundle Object</h4>
+         <p>Do a GET request on the id to fetch the OCA Bundle Object.</p>
+<pre class="example json" title="OCA Bundle">
 {
   "type": "spec/capture_base/1.0",
   "classification": "",
@@ -326,10 +328,10 @@ $.renderMethod[0].language[1]
   ]
 }
 </pre>
-         <h3>Validate Capture Base</h3>
+         <h4>Validate Capture Base</h4>
          <p>Verify the integrity with the SAID component of the URL.</p>
-         <h3>Query Overlays</h3>
-         <p>Query the available overlays with the desired language, overlayType and JSON path.</p>
+         <h4>Query Overlays</h4>
+         <p>Query the available overlays with the desired language, overlay name and JSON path.</p>
       </section>
       <section>
          <h2>Security Considerations</h2>
