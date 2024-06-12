@@ -83,7 +83,7 @@
       <h2>Data Model</h2>
       <p> The following sections outline the data model that is used by this specification for rendering methods </p>
       <section>
-        <h4>OverlayCaptureBundle</h4>
+        <h4>OverlayCaptureBundle Entry</h4>
         <p> When an <a>issuer</a> desires to specify an OCA Bundle for a <a>verifiable credential</a>, they MAY add a `renderMethod` property that uses the data model described below. </p>
         <table class="simple">
           <thead>
@@ -115,8 +115,8 @@
             </tr>
           </tbody>
         </table>
-        <p> The data model shown above is expressed in a <a>verifiable credential</a> in the example below. </p>
-        <pre class="example json" title="OverlayCaptureBundle Entry">
+        <p> An entry of the data model shown above is expressed in a <a>renderMethod</a> section in the example below. </p>
+<pre class="example json" title="OverlayCaptureBundle Entry">
 {
   "renderMethod": [{
     "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
@@ -302,15 +302,15 @@ $.renderMethod[0].language[1]
     </section>
     <section>
       <h2>Security Considerations</h2>
-      <p class="issue" title="Summary of Security Considerations"></p>
+      <p></p>
     </section>
     <section>
       <h2>Privacy Considerations</h2>
-      <p class="issue" title="Summary of Privacy Considerations">The Capture Base will flag sensitive attributes.</p>
+      <p>The Capture Base will flag sensitive attributes.</p>
     </section>
     <section>
       <h2>Application Use Cases</h2>
-      <p class="issue" title="Summary of Applications"> The complete list of applications can be found <a href="https://oca.colossi.network/guide/applications/">here</a>. Below is an overview. </p>
+      <p> The complete list of applications can be found <a href="https://oca.colossi.network/guide/applications/">here</a>. Below is an overview. </p>
       <h3>Data transformation</h3>
       <h3>Object presentation</h3>
       <h3>Internationalisation</h3>
