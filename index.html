@@ -116,31 +116,15 @@
           </tbody>
         </table>
         <p> The data model shown above is expressed in a <a>verifiable credential</a> in the example below. </p>
-        <pre class="example json nohighlight" title="Usage of the render property by an issuer">
+        <pre class="example json" title="OverlayCaptureBundle Entry">
 {
-  "@context": [
-    "https://www.w3.org/ns/credentials/v2",
-    "https://www.w3.org/ns/credentials/examples/v2",
-    "https://w3id.org/vc/render-method/v1"
-  ],
-  "id": "http://example.edu/credentials/3732",
-  "type": ["VerifiableCredential", "UniversityDegreeCredential"],
-  "issuer": "https://example.edu/issuers/14",
-  "validFrom": "2010-01-01T19:23:24Z",
-  "credentialSubject": {
-    "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
-    "degree": {
-      "type": "BachelorDegree",
-      "name": "Bachelor of Science and Arts"
-    }
-  },
-<span class="highlight">"renderMethod": [{
+  "renderMethod": [{
     "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
     "type": "OverlayCaptureBundle",
     "bundleVersion": "1.0,
     "overlayNames": ["information"],
     "supportedLanguages": ["en", "fr"]
-  }]</span>
+  }]
 }
 </pre>
         <p> In the example above, the <a>issuer</a> has provided an OCA Bundle for a bachelor's degree that will provide additional information to the <a>verifiable credential</a>.</p>
@@ -148,7 +132,7 @@
     </section>
     <section>
       <h2>Overlay Capture Architecture Bundles</h2>
-      <p class="issue" title="Summary of Security Considerations"></p>
+      <p>An OCA bundle consists of a Capture Base and a series of cryptographically bound Overlays.</p>
       <h3>Capture Base</h3>
 <pre class="example json" title="Capture Base">
 {
@@ -160,7 +144,7 @@
    "flagged_attributes":[]
 }
 </pre>
-      <h3>Bound Overlays</h3>
+      <h3>Overlays</h3>
 <pre class="example json" title="Semantic Information Overlay">
 {
    "capture_base":"EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis",
@@ -218,7 +202,7 @@
     "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
     "type": "OverlayCaptureBundle",
     "bundleVersion": "1.0,
-    "overlayNames": ["information"],
+    "overlayNames": ["information", "label", "cardinality", "mapping"],
     "supportedLanguages": ["en", "fr"]
   }]
 }
@@ -252,6 +236,65 @@ $.renderMethod[0].language[1]
 </pre>
 	<h3>Resolve Bundle</h3>
 	    <p>Do a GET request on the id to fetch the bundle.</p>
+<pre class="example json" title="OCA Bundle">
+{
+  "type": "spec/capture_base/1.0",
+  "classification": "",
+  "attributes": {
+    "$.credentialSubject.degree.type": "Array[Text]",
+    "$.credentialSubject.degree.name": "Text"
+  },
+  "flagged_attributes": [],
+  "overlays": [
+    {
+      "capture_base": "EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis",
+      "type": "spec/overlays/information/1.0",
+      "language": "en",
+      "attribute_information": {
+        "$.credentialSubject.degree.name": "The name of the degree obtained by the subject."
+      }
+    },
+    {
+      "capture_base": "EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis",
+      "type": "spec/overlays/information/1.0",
+      "language": "fr",
+      "attribute_information": {
+        "$.credentialSubject.degree.name": "Le nom du Diplôme obtenu par le sujet."
+      }
+    },
+	{
+	   "capture_base":"EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis",
+	   "type":"spec/overlays/label/1.0",
+	   "language":"en",
+	   "attribute_labels":{
+	      "$.credentialSubject.degree.name":"Degree Name",
+	   }
+	},
+	{
+	   "capture_base":"EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis",
+	   "type":"spec/overlays/label/1.0",
+	   "language":"fr",
+	   "attribute_labels":{
+	      "$.credentialSubject.degree.name":"Nom du diplôme",
+	   }
+	},
+    {
+      "capture_base": "Ev_RaB-gIOn8VAB3sg40mINxjiYRxdLVQrgce0aZbFcc",
+      "type": "spec/overlays/cardinality/1.0",
+      "attr_cardinality": {
+        "$.credentialSubject.degree.type": "1"
+      }
+    },
+    {
+      "capture_base": "Ev_RaB-gIOn8VAB3sg40mINxjiYRxdLVQrgce0aZbFcc",
+      "type": "spec/overlays/mapping/1.0",
+      "attribute_mapping": {
+        "$.credentialSubject.degree.name": "degreeName"
+      }
+    }
+  ]
+}
+</pre>
 	<h3>Validate Capture Base</h3>
 	    <p>Verify the integrity with the SAID component of the URL.</p>
 	<h3>Query Overlays</h3>
