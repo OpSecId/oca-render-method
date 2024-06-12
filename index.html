@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Overlay Capture Architecture Rendering Method</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
+    <script class="remove" src="https://w3c.github.io/vc-data-integrity/common.js"></script>
+    <script type="text/javascript" class="remove">
+      var respecConfig = {
+        // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
+        specStatus: "ED",
+        // the specification's short name, as in http://www.w3.org/TR/short-name/
+        shortName: "oca-render-method",
+        group: "credentials",
+        // if you wish the publication date to be other than today, set this
+        //publishDate:  "2023-04-18",
+        // if there a publicly available Editor's Draft, this is the link
+        edDraftURI: "https://opsecid.github.io/oca-render-method/",
+        //latestVersion: "https://opsecid.github.io/oca-render-method/",
+        // if you want to have extra CSS, append them to this list
+        // it is recommended that the respec.css stylesheet be kept
+        //extraCSS:             ["spec.css", "prettify.css"],
+        // editors, add as many as you like
+        // only "name" is required
+        editors: [{
+          name: "Patrick St-Louis",
+          url: "https://www.linkedin.com/in/patrick-stlouis/",
+          company: "Open Security and Identity",
+          companyURL: "https://opsecid.ca/"
+        }],
+        authors: [{
+          name: "Patrick St-Louis",
+          url: "https://www.linkedin.com/in/patrick-stlouis/",
+          company: "Open Security and Identity",
+          companyURL: "https://opsecid.ca/"
+        }],
+        github: "https://github.com/OpSecId/oca-render-method/",
+        // URI of the patent status for this WG, for Rec-track documents
+        // !!!! IMPORTANT !!!!
+        // This is important for Rec-track documents, do not copy a patent URI from a random
+        // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
+        // Team Contact.
+        // wgPatentURI:  "",
+        maxTocLevel: 4,
+        /*preProcess: [ webpayments.preProcess ],
+        alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
+        */
+        localBiblio: {
+          MULTIBASE: {
+            title: "Multibase",
+            href: "https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-01",
+          },
+          MULTICODEC: {
+            title: "Multicodec",
+            href: "https://github.com/multiformats/multicodec/",
+          },
+        },
+        lint: {
+          "no-unused-dfns": false
+        },
+        postProcess: [restrictRefs]
+      };
+    </script>
+    <style>
+      pre .highlight {
+        font-weight: bold;
+        color: green;
+      }
+
+      pre .comment {
+        font-weight: bold;
+        color: Gray;
+      }
+
+      .color-text {
+        font-weight: bold;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      }
+
+      ol.algorithm {
+        counter-reset: numsection;
+        list-style-type: none;
+      }
+
+      ol.algorithm li {
+        margin: 0.5em 0;
+      }
+
+      ol.algorithm li:before {
+        font-weight: bold;
+        counter-increment: numsection;
+        content: counters(numsection, ".") ") ";
+      }
+    </style>
+  </head>
+  <body>
+    <section id="abstract">
+      <p> This specification describes mechanisms to apply the Overlay Capture Architecture to Verifiable Credentials as a Render Method. </p>
+    </section>
+    <section id="sotd">
+      <p> This is an experimental specification and is undergoing regular revisions. It is not fit for production deployment. </p>
+    </section>
+    <section>
+      <h2>Introduction</h2>
+      <p> </p>
+      <section id="terminology">
+        <h3>Terminology</h3>
+        <div data-include="https://w3c.github.io/vc-data-model/terms.html"></div>
+      </section>
+      <section id="conformance">
+        <p> A <dfn>conforming render method</dfn> is any concrete expression of the data model that complies with the normative statements in this specification. Specifically, all relevant normative statements in Sections <a href="#data-model"></a> and <a href="#algorithms"></a> of this document MUST be enforced. </p>
+        <p> A <dfn class="lint-ignore">conforming processor</dfn> is any algorithm realized as software and/or hardware that generates or consumes a <a>conforming render method</a>. Conforming processors MUST produce errors when non-conforming documents are consumed. </p>
+        <p> This document also contains examples that contain JSON and JSON-LD content. Some of these examples contain characters that are invalid JSON, such as inline comments (`//`) and the use of ellipsis (`...`) to denote information that adds little value to the example. Implementers are cautioned to remove this content if they desire to use the information as valid JSON or JSON-LD. </p>
+      </section>
+    </section>
+    <section>
+      <h2>Data Model</h2>
+      <p> The following sections outline the data model that is used by this specification for rendering methods </p>
+      <section>
+        <h3>The `renderMethod` Property</h3>
+        <p> The `renderMethod` property is a <a href="https://www.w3.org/TR/vc-data-model-2.0/#reserved-extension-points"> reserved extension point</a> in the Verifiable Credentials Data Model specification [[VC-DATA-MODEL-2.0]]. An <a>issuer</a> can utilize this property in a <a>verifiable credential</a> to express one or more preferred render methods. </p>
+        <dl>
+          <dt>
+            <var>renderMethod</var>
+          </dt>
+          <dd> The value of the `renderMethod` property MUST specify one or more rendering methods that can be used by software to express the <a>verifiable credential</a> using a visual, auditory, or haptic mechanism. Each `renderMethod` value MUST specify its `type`, for example, `OverlayCaptureBundle`. The precise contents of each rendering hint is determined by the specific `renderMethod` `type` definition. </dd>
+        </dl>
+      </section>
+      <section>
+        <h4>OverlayCaptureBundle</h4>
+        <p> When an <a>issuer</a> desires to specify SVG rendering instructions for a <a>verifiable credential</a>, they MAY add a `render` property that uses the data model described below. </p>
+        <table class="simple">
+          <thead>
+            <tr>
+              <th style="white-space: nowrap">Property</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td> A URL that dereferences to an JSON document [[JSON]] with a valid SAID [[SAID]] file name. </td>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td> The <code>type</code> property MUST be <code>OverlayCaptureBundle</code>. </td>
+            </tr>
+          </tbody>
+        </table>
+        <p> The data model shown above is expressed in a <a>verifiable credential</a> in the example below. </p>
+        <pre class="example nohighlight" title="Usage of the render property by an issuer">
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://www.w3.org/ns/credentials/examples/v2",
+    "https://w3id.org/vc/render-method/v1"
+  ],
+  "id": "http://example.edu/credentials/3732",
+  "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "issuer": "https://example.edu/issuers/14",
+  "validFrom": "2010-01-01T19:23:24Z",
+  "credentialSubject": {
+    "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
+    "degree": {
+      "type": "BachelorDegree",
+      "name": "Bachelor of Science and Arts"
+    }
+  },
+  
+					<span class="highlight">"renderMethod": [{
+    "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
+    "type": "OverlayCaptureBundle"
+  }]
+  </span>
+}
+        
+				</pre>
+        <p> In the example above, the <a>issuer</a> has provided an SVG rendering template for a bachelor's degree that will be filled in with the information in the <a>verifiable credential</a>. The rendering is preferred when the device or paper is in a portrait (display is taller than it is wider) orientation. </p>
+      </section>
+    </section>
+    <section>
+      <h2>Overlay Capture Architecture Bundles</h2>
+      <p class="issue" title="Summary of Security Considerations"></p>
+      <h3>Capture Base</h3>
+      <h3>Bound Overlays</h3>
+    </section>
+    <section>
+      <h2>Algorythms</h2>
+      <p class="issue" title="Algorythms"></p>
+    </section>
+    <section>
+      <h2>Security Considerations</h2>
+      <p class="issue" title="Summary of Security Considerations"></p>
+    </section>
+    <section>
+      <h2>Privacy Considerations</h2>
+      <p class="issue" title="Summary of Privacy Considerations"></p>
+    </section>
+    <section>
+      <h2>Application Use Cases</h2>
+      <p class="issue" title="Summary of Applications"> The list of applications can be found <a href="https://oca.colossi.network/guide/applications/">here</a>. Below is an overview. </p>
+      <h3>Data transformation using overlays</h3>
+      <h3>Object presentation using overlays</h3>
+      <h3>Internationalisation using language-specific overlays</h3>
+      <h3>Distributed custodianship of task-specific objects</h3>
+      <h3>Internet of Things (IoT) applications using overlays</h3>
+    </section>
+  </body>
+</html>
