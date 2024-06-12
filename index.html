@@ -156,21 +156,7 @@
             <p> In the example above, the <a>issuer</a> has provided an OCA Bundle for a bachelor's degree that will provide additional information to the <a>verifiable credential</a>.</p>
          </section>
          <section>
-            <h3>Capture Base</h3>
-            <pre class="example json" title="Capture Base">
-{
-   "type":"spec/capture_base/1.0",
-   "classification":"",
-   "attributes":{
-	"$.credentialSubject.degree.type": "Array[Text]",
-	"$.credentialSubject.degree.name": "Text"
-   },
-   "flagged_attributes":[]
-}
-</pre>
-         </section>
-         <section>
-            <h2>Overlay Capture Architecture Bundles</h2>
+            <h2>OverlayCaptureBundle</h2>
             <p>An OCA bundle consists of a Capture Base and a series of cryptographically bound Overlays.</p>
             <h3>Capture Base</h3>
             <pre class="example json" title="Capture Base">
