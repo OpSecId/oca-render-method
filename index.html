@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OCA Rendering Method</title>
+    <title>OCA Render Method</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
     <script class="remove">
@@ -103,15 +103,15 @@
             </tr>
             <tr>
               <td>bundleVersion</td>
-              <td> The bundle version provided by the issuer. The is used to define OCA object's types. </td>
+              <td> The bundle version provided by the issuer used to define OCA Object types. </td>
             </tr>
             <tr>
               <td>overlayNames</td>
-              <td> The overlay names provided by the issuer. These strings MUST map to an overlay's type after pairing it with the version and mapping it to "spec/overlay/{overlayName}/{version}" </td>
+              <td> The overlay names provided by the issuer. These strings MUST map to an overlay's type after pairing it with the version like so "spec/overlay/{overlayName}/{version}". </td>
             </tr>
             <tr>
               <td>supportedLanguages</td>
-              <td> The language support provided by the issuer. These values can be used to querry the desired OCA Objects. </td>
+              <td> The language support provided by the issuer. These values can be used to querry the desired OCA Objects. The following OCA Object names support language: information, label, meta and entry </td>
             </tr>
           </tbody>
         </table>
