@@ -30,6 +30,32 @@
 	lint: {"no-unused-dfns": false},
       };
     </script>
+    <style>
+      pre .highlight {
+        font-weight: bold;
+        color: green;
+      }
+      pre .comment {
+        font-weight: bold;
+        color: Gray;
+      }
+      .color-text {
+        font-weight: bold;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      }
+      ol.algorithm {
+        counter-reset: numsection;
+        list-style-type: none;
+      }
+      ol.algorithm li {
+        margin: 0.5em 0;
+      }
+      ol.algorithm li:before {
+        font-weight: bold;
+        counter-increment: numsection;
+        content: counters(numsection, ".") ") ";
+      }
+    </style>
   </head>
   <body>
     <section id="abstract">
@@ -109,10 +135,7 @@
   
 					<span class="highlight">"renderMethod": [{
     "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
-    "type": "OverlayCaptureBundle",
-    "semanticOverlays": ["information", "label"],
-    "inputOverlays": ["information", "label"],
-    "presentationOverlays": ["information", "label"],
+    "type": "OverlayCaptureBundle"
   }]
   </span>
 }
