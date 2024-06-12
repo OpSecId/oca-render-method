@@ -66,7 +66,7 @@
     </section>
     <section class="informative">
       <h2>Introduction</h2>
-      <p> </p>
+      <p></p>
       <aside class="note" title="Full OCA Specification">
         <p>Click <a href="https://oca.colossi.network/specification/">here</a> for the full OCA specification!</p>
       </aside>
@@ -101,6 +101,18 @@
               <td>type</td>
               <td> The <code>type</code> property MUST be <code>OverlayCaptureBundle</code>. </td>
             </tr>
+            <tr>
+              <td>bundleVersion</td>
+              <td> The bundle version provided by the issuer. The is used to define OCA object's types. </td>
+            </tr>
+            <tr>
+              <td>overlayNames</td>
+              <td> The overlay names provided by the issuer. These strings MUST map to an overlay's type after pairing it with the version and mapping it to "spec/overlay/{overlayName}/{version}" </td>
+            </tr>
+            <tr>
+              <td>supportedLanguages</td>
+              <td> The language support provided by the issuer. These values can be used to querry the desired OCA Objects. </td>
+            </tr>
           </tbody>
         </table>
         <p> The data model shown above is expressed in a <a>verifiable credential</a> in the example below. </p>
@@ -125,8 +137,9 @@
 <span class="highlight">"renderMethod": [{
     "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
     "type": "OverlayCaptureBundle",
-    "overlayTypes": ["information"],
-    "language": ["en", "fr"],
+    "bundleVersion": "1.0,
+    "overlayNames": ["information"],
+    "supportedLanguages": ["en", "fr"]
   }]</span>
 }
 </pre>
@@ -148,7 +161,7 @@
 }
 </pre>
       <h3>Bound Overlays</h3>
-<pre class="example json" title="Bound Overlay">
+<pre class="example json" title="Semantic Information Overlay">
 {
    "capture_base":"EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis",
    "type":"spec/overlays/information/1.0",
@@ -158,15 +171,91 @@
    }
 }
 </pre>
+<pre class="example json" title="Inputs Cardinality Overlay">
+{
+  "capture_base":"Ev_RaB-gIOn8VAB3sg40mINxjiYRxdLVQrgce0aZbFcc",
+  "type":"spec/overlays/cardinality/1.0",
+  "attr_cardinality":{
+    "$.credentialSubject.degree.type":"1"
+  }
+}
+</pre>
+<pre class="example json" title="Transformation Attribute Mapping Overlay">
+{
+  "capture_base":"Ev_RaB-gIOn8VAB3sg40mINxjiYRxdLVQrgce0aZbFcc",
+  "type":"spec/overlays/mapping/1.0",
+  "attribute_mapping":{
+    "$.credentialSubject.degree.name":"degreeName"
+  }
+}
+</pre>
 	    
     </section>
     <section id="algorithms">
       <h2>Algorythms</h2>
-      <p class="issue" title="Algorythms"></p>
-	<h3>Flatten VC</h3>
+      <p>These algorythms instruct how to apply an OCA bundle to a Verifiable Credential.</p>
+	<h3>Transform VC</h3>
+	<p>Transform Verifiable Credential to JSON path array.</p>
+<pre class="example json" title="Verifiable Credential">
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://www.w3.org/ns/credentials/examples/v2",
+    "https://w3id.org/vc/render-method/v1"
+  ],
+  "id": "http://example.edu/credentials/3732",
+  "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "issuer": "https://example.edu/issuers/14",
+  "validFrom": "2010-01-01T19:23:24Z",
+  "credentialSubject": {
+    "id": "did:example:ebfeb1f712ebc6f1c276e12ec21",
+    "degree": {
+      "type": "BachelorDegree",
+      "name": "Bachelor of Science and Arts"
+    }
+  },
+  "renderMethod": [{
+    "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
+    "type": "OverlayCaptureBundle",
+    "bundleVersion": "1.0,
+    "overlayNames": ["information"],
+    "supportedLanguages": ["en", "fr"]
+  }]
+}
+</pre>
+<pre class="example" title="JSON Paths">
+$
+$["@context"]
+$["@context"][0]
+$["@context"][1]
+$["@context"][2]
+$.id
+$.type
+$.type[0]
+$.type[1]
+$.issuer
+$.validFrom
+$.credentialSubject
+$.credentialSubject.id
+$.credentialSubject.degree
+$.credentialSubject.degree.type
+$.credentialSubject.degree.name
+$.renderMethod
+$.renderMethod[0]
+$.renderMethod[0].id
+$.renderMethod[0].type
+$.renderMethod[0].overlayType
+$.renderMethod[0].overlayType[0]
+$.renderMethod[0].language
+$.renderMethod[0].language[0]
+$.renderMethod[0].language[1]
+</pre>
+	<h3>Resolve Bundle</h3>
+	    <p>Do a GET request on the id to fetch the bundle.</p>
 	<h3>Validate Capture Base</h3>
-	<h3>Validate Overlays</h3>
-	<h3>Apply Overlays</h3>
+	    <p>Verify the integrity with the SAID component of the URL.</p>
+	<h3>Query Overlays</h3>
+	    <p>Query the available overlays with the desired language, overlayType and JSON path.</p>
     </section>
     <section>
       <h2>Security Considerations</h2>
@@ -174,7 +263,7 @@
     </section>
     <section>
       <h2>Privacy Considerations</h2>
-      <p class="issue" title="Summary of Privacy Considerations"></p>
+      <p class="issue" title="Summary of Privacy Considerations">The Capture Base will flag sensitive attributes.</p>
     </section>
     <section>
       <h2>Application Use Cases</h2>
