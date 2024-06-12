@@ -3,64 +3,6 @@
   <head>
     <title>Overlay Capture Architecture Rendering Method</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
-    <script class="remove" src="https://w3c.github.io/vc-data-integrity/common.js"></script>
-    <script type="text/javascript" class="remove">
-      var respecConfig = {
-        // specification status (e.g. WD, LCWD, NOTE, etc.). If in doubt use ED.
-        specStatus: "ED",
-        // the specification's short name, as in http://www.w3.org/TR/short-name/
-        shortName: "oca-render-method",
-        group: "credentials",
-        // if you wish the publication date to be other than today, set this
-        //publishDate:  "2023-04-18",
-        // if there a publicly available Editor's Draft, this is the link
-        edDraftURI: "https://opsecid.github.io/oca-render-method/",
-        //latestVersion: "https://opsecid.github.io/oca-render-method/",
-        // if you want to have extra CSS, append them to this list
-        // it is recommended that the respec.css stylesheet be kept
-        //extraCSS:             ["spec.css", "prettify.css"],
-        // editors, add as many as you like
-        // only "name" is required
-        editors: [{
-          name: "Patrick St-Louis",
-          url: "https://www.linkedin.com/in/patrick-stlouis/",
-          company: "Open Security and Identity",
-          companyURL: "https://opsecid.ca/"
-        }],
-        authors: [{
-          name: "Patrick St-Louis",
-          url: "https://www.linkedin.com/in/patrick-stlouis/",
-          company: "Open Security and Identity",
-          companyURL: "https://opsecid.ca/"
-        }],
-        github: "https://github.com/OpSecId/oca-render-method/",
-        // URI of the patent status for this WG, for Rec-track documents
-        // !!!! IMPORTANT !!!!
-        // This is important for Rec-track documents, do not copy a patent URI from a random
-        // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
-        // Team Contact.
-        // wgPatentURI:  "",
-        maxTocLevel: 4,
-        /*preProcess: [ webpayments.preProcess ],
-        alternateFormats: [ {uri: "diff-20111214.html", label: "diff to previous version"} ],
-        */
-        localBiblio: {
-          MULTIBASE: {
-            title: "Multibase",
-            href: "https://datatracker.ietf.org/doc/html/draft-multiformats-multibase-01",
-          },
-          MULTICODEC: {
-            title: "Multicodec",
-            href: "https://github.com/multiformats/multicodec/",
-          },
-        },
-        lint: {
-          "no-unused-dfns": false
-        },
-        postProcess: [restrictRefs]
-      };
-    </script>
     <style>
       pre .highlight {
         font-weight: bold;
@@ -128,7 +70,7 @@
       </section>
       <section>
         <h4>OverlayCaptureBundle</h4>
-        <p> When an <a>issuer</a> desires to specify SVG rendering instructions for a <a>verifiable credential</a>, they MAY add a `render` property that uses the data model described below. </p>
+        <p> When an <a>issuer</a> desires to specify an OCA Bundle for a <a>verifiable credential</a>, they MAY add a `renderMethod` property that uses the data model described below. </p>
         <table class="simple">
           <thead>
             <tr>
@@ -175,7 +117,7 @@
 }
         
 				</pre>
-        <p> In the example above, the <a>issuer</a> has provided an SVG rendering template for a bachelor's degree that will be filled in with the information in the <a>verifiable credential</a>. The rendering is preferred when the device or paper is in a portrait (display is taller than it is wider) orientation. </p>
+        <p> In the example above, the <a>issuer</a> has provided an OCA Bundle for a bachelor's degree that will provide additional information to the <a>verifiable credential</a>.</p>
       </section>
     </section>
     <section>
@@ -198,12 +140,10 @@
     </section>
     <section>
       <h2>Application Use Cases</h2>
-      <p class="issue" title="Summary of Applications"> The list of applications can be found <a href="https://oca.colossi.network/guide/applications/">here</a>. Below is an overview. </p>
-      <h3>Data transformation using overlays</h3>
-      <h3>Object presentation using overlays</h3>
-      <h3>Internationalisation using language-specific overlays</h3>
-      <h3>Distributed custodianship of task-specific objects</h3>
-      <h3>Internet of Things (IoT) applications using overlays</h3>
+      <p class="issue" title="Summary of Applications"> The complete list of applications can be found <a href="https://oca.colossi.network/guide/applications/">here</a>. Below is an overview. </p>
+      <h3>Data transformation</h3>
+      <h3>Object presentation</h3>
+      <h3>Internationalisation</h3>
     </section>
   </body>
 </html>
