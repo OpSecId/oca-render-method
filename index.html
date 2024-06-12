@@ -1,146 +1,146 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>OCA Render Method</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
-    <script class="remove">
-      // All config options at https://respec.org/docs/
-      var respecConfig = {
-        specStatus: "ED",
-	shortName: "oca-render-method",
-        editors: [
-		{ 
-			name: "Patrick St-Louis", 
-			url: "https://www.linkedin.com/in/patrick-stlouis/", 
-			company: "Open Security and Identity", 
-			companyURL: "https://opsecid.ca/"
-		},
-		{ 
-			name: "Akiff Manji", 
-			url: "https://www.linkedin.com/in/akiffmanji/", 
-			company: "Petri Dish Development", 
-			companyURL: "https://petridish.dev/"
-		},
-		{ 
-			name: "Emiliano Suñé", 
-			url: "https://www.linkedin.com/in/emilianosune/", 
-			company: "Quartech", 
-			companyURL: "http://www.quartech.com/"
-		}
-	],
-	authors: [
-		{ 
-			name: "Patrick St-Louis", 
-			url: "https://www.linkedin.com/in/patrick-stlouis/", 
-			company: "Open Security and Identity", 
-			companyURL: "https://opsecid.ca/"
-		},
-		{ 
-			name: "Akiff Manji", 
-			url: "https://www.linkedin.com/in/akiffmanji/", 
-			company: "Petri Dish Development", 
-			companyURL: "https://petridish.dev/"
-		},
-		{ 
-			name: "Emiliano Suñé", 
-			url: "https://www.linkedin.com/in/emilianosune/", 
-			company: "Quartech", 
-			companyURL: "http://www.quartech.com/"
-		}
-	],
-        github: "https://github.com/opsecid/oca-render-method/",
-	maxTocLevel: 4,
-	lint: {"no-unused-dfns": false},
-      };
-    </script>
-    <style>
-      pre .highlight {
-        font-weight: bold;
-        color: green;
-      }
-      pre .comment {
-        font-weight: bold;
-        color: Gray;
-      }
-      .color-text {
-        font-weight: bold;
-        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-      }
-      ol.algorithm {
-        counter-reset: numsection;
-        list-style-type: none;
-      }
-      ol.algorithm li {
-        margin: 0.5em 0;
-      }
-      ol.algorithm li:before {
-        font-weight: bold;
-        counter-increment: numsection;
-        content: counters(numsection, ".") ") ";
-      }
-    </style>
-  </head>
-  <body>
-    <section id="abstract">
-      <p> This specification describes mechanisms to apply the Overlay Capture Architecture to Verifiable Credentials as a Render Method. </p>
-    </section>
-    <section id="sotd">
-      <p> This is an experimental specification and is undergoing regular revisions. It is not fit for production deployment. </p>
-    </section>
-    <section class="informative">
-      <h2>Introduction</h2>
-      <p></p>
-      <aside class="note" title="Full OCA Specification">
-        <p>Click <a href="https://oca.colossi.network/specification/">here</a> for the full OCA specification!</p>
-      </aside>
-      <section id="terminology">
-        <h3>Terminology</h3>
+   <head>
+      <title>OCA Render Method</title>
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+      <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
+      <script class="remove">
+         // All config options at https://respec.org/docs/
+         var respecConfig = {
+           specStatus: "ED",
+         shortName: "oca-render-method",
+           editors: [
+         { 
+         name: "Patrick St-Louis", 
+         url: "https://www.linkedin.com/in/patrick-stlouis/", 
+         company: "Open Security and Identity", 
+         companyURL: "https://opsecid.ca/"
+         },
+         { 
+         name: "Akiff Manji", 
+         url: "https://www.linkedin.com/in/akiffmanji/", 
+         company: "Petri Dish Development", 
+         companyURL: "https://petridish.dev/"
+         },
+         { 
+         name: "Emiliano Suñé", 
+         url: "https://www.linkedin.com/in/emilianosune/", 
+         company: "Quartech", 
+         companyURL: "http://www.quartech.com/"
+         }
+         ],
+         authors: [
+         { 
+         name: "Patrick St-Louis", 
+         url: "https://www.linkedin.com/in/patrick-stlouis/", 
+         company: "Open Security and Identity", 
+         companyURL: "https://opsecid.ca/"
+         },
+         { 
+         name: "Akiff Manji", 
+         url: "https://www.linkedin.com/in/akiffmanji/", 
+         company: "Petri Dish Development", 
+         companyURL: "https://petridish.dev/"
+         },
+         { 
+         name: "Emiliano Suñé", 
+         url: "https://www.linkedin.com/in/emilianosune/", 
+         company: "Quartech", 
+         companyURL: "http://www.quartech.com/"
+         }
+         ],
+           github: "https://github.com/opsecid/oca-render-method/",
+         maxTocLevel: 4,
+         lint: {"no-unused-dfns": false},
+         };
+      </script>
+      <style>
+         pre .highlight {
+         font-weight: bold;
+         color: green;
+         }
+         pre .comment {
+         font-weight: bold;
+         color: Gray;
+         }
+         .color-text {
+         font-weight: bold;
+         text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+         }
+         ol.algorithm {
+         counter-reset: numsection;
+         list-style-type: none;
+         }
+         ol.algorithm li {
+         margin: 0.5em 0;
+         }
+         ol.algorithm li:before {
+         font-weight: bold;
+         counter-increment: numsection;
+         content: counters(numsection, ".") ") ";
+         }
+      </style>
+   </head>
+   <body>
+      <section id="abstract">
+         <p> This specification describes mechanisms to apply the Overlay Capture Architecture to Verifiable Credentials as a Render Method. </p>
       </section>
-      <section id="conformance">
-        <p> A <dfn>conforming render method</dfn> is any concrete expression of the data model that complies with the normative statements in this specification. Specifically, all relevant normative statements in Sections <a href="#data-model"></a> and <a href="#algorithms"></a> of this document MUST be enforced. </p>
-        <p> A <dfn class="lint-ignore">conforming processor</dfn> is any algorithm realized as software and/or hardware that generates or consumes a <a>conforming render method</a>. Conforming processors MUST produce errors when non-conforming documents are consumed. </p>
-        <p> This document also contains examples that contain JSON and JSON-LD content. Some of these examples contain characters that are invalid JSON, such as inline comments (`//`) and the use of ellipsis (`...`) to denote information that adds little value to the example. Implementers are cautioned to remove this content if they desire to use the information as valid JSON or JSON-LD. </p>
+      <section id="sotd">
+         <p> This is an experimental specification and is undergoing regular revisions. It is not fit for production deployment. </p>
       </section>
-    </section>
-    <section>
-      <h2>Data Model</h2>
-      <p> The following sections outline the data model that is used by this specification for rendering methods </p>
+      <section class="informative">
+         <h2>Introduction</h2>
+         <p></p>
+         <aside class="note" title="Full OCA Specification">
+            <p>Click <a href="https://oca.colossi.network/specification/">here</a> for the full OCA specification!</p>
+         </aside>
+         <section id="terminology">
+            <h3>Terminology</h3>
+         </section>
+         <section id="conformance">
+            <p> A <dfn>conforming render method</dfn> is any concrete expression of the data model that complies with the normative statements in this specification. Specifically, all relevant normative statements in Sections <a href="#data-model"></a> and <a href="#algorithms"></a> of this document MUST be enforced. </p>
+            <p> A <dfn class="lint-ignore">conforming processor</dfn> is any algorithm realized as software and/or hardware that generates or consumes a <a>conforming render method</a>. Conforming processors MUST produce errors when non-conforming documents are consumed. </p>
+            <p> This document also contains examples that contain JSON and JSON-LD content. Some of these examples contain characters that are invalid JSON, such as inline comments (`//`) and the use of ellipsis (`...`) to denote information that adds little value to the example. Implementers are cautioned to remove this content if they desire to use the information as valid JSON or JSON-LD. </p>
+         </section>
+      </section>
       <section>
-        <h4>OverlayCaptureBundle Entry</h4>
-        <p> When an <a>issuer</a> desires to specify an OCA Bundle for a <a>verifiable credential</a>, they MAY add a `renderMethod` property that uses the data model described below. </p>
-        <table class="simple">
-          <thead>
-            <tr>
-              <th style="white-space: nowrap">Property</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>id</td>
-              <td> A URL that dereferences to an JSON document [[JSON]] with a valid <a href="https://datatracker.ietf.org/doc/html/draft-ssmith-said">SAID</a> file name. </td>
-            </tr>
-            <tr>
-              <td>type</td>
-              <td> The <code>type</code> property MUST be <code>OverlayCaptureBundle</code>. </td>
-            </tr>
-            <tr>
-              <td>bundleVersion</td>
-              <td> The bundle version provided by the issuer used to define OCA Object types. </td>
-            </tr>
-            <tr>
-              <td>overlayNames</td>
-              <td> The overlay names provided by the issuer. These strings MUST map to an overlay's type after pairing it with the version like so "spec/overlay/{overlayName}/{version}". </td>
-            </tr>
-            <tr>
-              <td>supportedLanguages</td>
-              <td> The language support provided by the issuer. These values can be used to querry the desired OCA Objects. The following OCA Object names support language: information, label, meta and entry </td>
-            </tr>
-          </tbody>
-        </table>
-        <p> An entry of the data model shown above is expressed in a <a>renderMethod</a> section in the example below. </p>
-<pre class="example json" title="OverlayCaptureBundle Entry">
+         <h2>Data Model</h2>
+         <p> The following sections outline the data model that is used by this specification for rendering methods </p>
+         <section>
+            <h3>OverlayCaptureBundle Entry</h3>
+            <p> When an <a>issuer</a> desires to specify an OCA Bundle for a <a>verifiable credential</a>, they MAY add a `renderMethod` property that uses the data model described below. </p>
+            <table class="simple">
+               <thead>
+                  <tr>
+                     <th style="white-space: nowrap">Property</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>id</td>
+                     <td> A URL that dereferences to an JSON document [[JSON]] with a valid <a href="https://datatracker.ietf.org/doc/html/draft-ssmith-said">SAID</a> file name. </td>
+                  </tr>
+                  <tr>
+                     <td>type</td>
+                     <td> The <code>type</code> property MUST be <code>OverlayCaptureBundle</code>. </td>
+                  </tr>
+                  <tr>
+                     <td>bundleVersion</td>
+                     <td> The bundle version provided by the issuer used to define OCA Object types. </td>
+                  </tr>
+                  <tr>
+                     <td>overlayNames</td>
+                     <td> The overlay names provided by the issuer. These strings MUST map to an overlay's type after pairing it with the version like so "spec/overlay/{overlayName}/{version}". </td>
+                  </tr>
+                  <tr>
+                     <td>supportedLanguages</td>
+                     <td> The language support provided by the issuer. These values can be used to querry the desired OCA Objects. The following OCA Object names support language: information, label, meta and entry </td>
+                  </tr>
+               </tbody>
+            </table>
+            <p> An entry of the data model shown above is expressed in a <a>renderMethod</a> section in the example below. </p>
+            <pre class="example json" title="OverlayCaptureBundle Entry">
 {
   "renderMethod": [
     {
@@ -153,14 +153,11 @@
   ]
 }
 </pre>
-        <p> In the example above, the <a>issuer</a> has provided an OCA Bundle for a bachelor's degree that will provide additional information to the <a>verifiable credential</a>.</p>
-      </section>
-    </section>
-    <section>
-      <h2>Overlay Capture Architecture Bundles</h2>
-      <p>An OCA bundle consists of a Capture Base and a series of cryptographically bound Overlays.</p>
-      <h3>Capture Base</h3>
-<pre class="example json" title="Capture Base">
+            <p> In the example above, the <a>issuer</a> has provided an OCA Bundle for a bachelor's degree that will provide additional information to the <a>verifiable credential</a>.</p>
+         </section>
+         <section>
+            <h3>Capture Base</h3>
+            <pre class="example json" title="Capture Base">
 {
    "type":"spec/capture_base/1.0",
    "classification":"",
@@ -171,8 +168,24 @@
    "flagged_attributes":[]
 }
 </pre>
-      <h3>Overlays</h3>
-<pre class="example json" title="Semantic Information Overlay">
+         </section>
+         <section>
+            <h2>Overlay Capture Architecture Bundles</h2>
+            <p>An OCA bundle consists of a Capture Base and a series of cryptographically bound Overlays.</p>
+            <h3>Capture Base</h3>
+            <pre class="example json" title="Capture Base">
+{
+   "type":"spec/capture_base/1.0",
+   "classification":"",
+   "attributes":{
+	"$.credentialSubject.degree.type": "Array[Text]",
+	"$.credentialSubject.degree.name": "Text"
+   },
+   "flagged_attributes":[]
+}
+</pre>
+            <h3>Bound Overlays</h3>
+            <pre class="example json" title="Semantic Information Overlay">
 {
    "capture_base":"EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis",
    "type":"spec/overlays/information/1.0",
@@ -182,7 +195,7 @@
    }
 }
 </pre>
-<pre class="example json" title="Inputs Cardinality Overlay">
+            <pre class="example json" title="Inputs Cardinality Overlay">
 {
   "capture_base":"Ev_RaB-gIOn8VAB3sg40mINxjiYRxdLVQrgce0aZbFcc",
   "type":"spec/overlays/cardinality/1.0",
@@ -191,7 +204,7 @@
   }
 }
 </pre>
-<pre class="example json" title="Transformation Attribute Mapping Overlay">
+            <pre class="example json" title="Transformation Attribute Mapping Overlay">
 {
   "capture_base":"Ev_RaB-gIOn8VAB3sg40mINxjiYRxdLVQrgce0aZbFcc",
   "type":"spec/overlays/mapping/1.0",
@@ -200,14 +213,14 @@
   }
 }
 </pre>
-	    
-    </section>
-    <section id="algorithms">
-      <h2>Algorythms</h2>
-      <p>These algorythms instruct how to apply an OCA bundle to a Verifiable Credential.</p>
-	<h3>Transform VC</h3>
-	<p>Transform Verifiable Credential to JSON path array.</p>
-<pre class="example json" title="Verifiable Credential">
+         </section>
+      </section>
+      <section id="algorithms">
+         <h2>Algorythms</h2>
+         <p>These algorythms instruct how to apply an OCA bundle to a Verifiable Credential.</p>
+         <h3>Transform VC</h3>
+         <p>Transform Verifiable Credential to JSON path array.</p>
+         <pre class="example json" title="Verifiable Credential">
 {
   "@context": [
     "https://www.w3.org/ns/credentials/v2",
@@ -239,7 +252,7 @@
   ]
 }
 </pre>
-<pre class="example" title="JSON Paths">
+         <pre class="example" title="JSON Paths">
 $
 $["@context"]
 $["@context"][0]
@@ -266,9 +279,9 @@ $.renderMethod[0].language
 $.renderMethod[0].language[0]
 $.renderMethod[0].language[1]
 </pre>
-	<h3>Resolve Bundle</h3>
-	    <p>Do a GET request on the id to fetch the bundle.</p>
-<pre class="example json" title="OCA Bundle">
+         <h3>Resolve Bundle</h3>
+         <p>Do a GET request on the id to fetch the bundle.</p>
+         <pre class="example json" title="OCA Bundle">
 {
   "type": "spec/capture_base/1.0",
   "classification": "",
@@ -327,28 +340,28 @@ $.renderMethod[0].language[1]
   ]
 }
 </pre>
-	<h3>Validate Capture Base</h3>
-	    <p>Verify the integrity with the SAID component of the URL.</p>
-	<h3>Query Overlays</h3>
-	    <p>Query the available overlays with the desired language, overlayType and JSON path.</p>
-    </section>
-    <section>
-      <h2>Security Considerations</h2>
-	     <h3>Self-Addressing IDentifier (SAID)</h3>
-      		<p><a>SAID</a> are used as a cryptographic integrity mechanism for OCA Objects.</p>
-      <p></p>
-    </section>
-    <section>
-      <h2>Privacy Considerations</h2>
-	    <h3>Flagged Attributes</h3>
-      		<p>The Capture Base can flag sensitive attributes.</p>
-    </section>
-    <section>
-      <h2>Application Use Cases</h2>
-      <p> The complete list of applications can be found <a href="https://oca.colossi.network/guide/applications/">here</a>. Below is an overview. </p>
-      <h3>Data transformation</h3>
-      <h3>Object presentation</h3>
-      <h3>Internationalisation</h3>
-    </section>
-  </body>
+         <h3>Validate Capture Base</h3>
+         <p>Verify the integrity with the SAID component of the URL.</p>
+         <h3>Query Overlays</h3>
+         <p>Query the available overlays with the desired language, overlayType and JSON path.</p>
+      </section>
+      <section>
+         <h2>Security Considerations</h2>
+         <h3>Self-Addressing IDentifier (SAID)</h3>
+         <p><a>SAID</a> are used as a cryptographic integrity mechanism for OCA Objects.</p>
+         <p></p>
+      </section>
+      <section>
+         <h2>Privacy Considerations</h2>
+         <h3>Flagged Attributes</h3>
+         <p>The Capture Base can flag sensitive attributes.</p>
+      </section>
+      <section>
+         <h2>Application Use Cases</h2>
+         <p> The complete list of applications can be found <a href="https://oca.colossi.network/guide/applications/">here</a>. Below is an overview. </p>
+         <h3>Data transformation</h3>
+         <h3>Object presentation</h3>
+         <h3>Internationalisation</h3>
+      </section>
+   </body>
 </html>
