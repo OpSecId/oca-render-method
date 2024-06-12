@@ -118,13 +118,15 @@
         <p> An entry of the data model shown above is expressed in a <a>renderMethod</a> section in the example below. </p>
 <pre class="example json" title="OverlayCaptureBundle Entry">
 {
-  "renderMethod": [{
-    "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
-    "type": "OverlayCaptureBundle",
-    "bundleVersion": "1.0,
-    "overlayNames": ["information"],
-    "supportedLanguages": ["en", "fr"]
-  }]
+  "renderMethod": [
+    {
+      "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
+      "type": "OverlayCaptureBundle",
+      "bundleVersion": "1.0",
+      "overlayNames": [ "information", "label", "cardinality", "mapping" ],
+      "supportedLanguages": [ "en", "fr" ]
+    }
+  ]
 }
 </pre>
         <p> In the example above, the <a>issuer</a> has provided an OCA Bundle for a bachelor's degree that will provide additional information to the <a>verifiable credential</a>.</p>
@@ -188,7 +190,10 @@
     "https://w3id.org/vc/render-method/v1"
   ],
   "id": "http://example.edu/credentials/3732",
-  "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "type": [
+    "VerifiableCredential",
+    "UniversityDegreeCredential"
+  ],
   "issuer": "https://example.edu/issuers/14",
   "validFrom": "2010-01-01T19:23:24Z",
   "credentialSubject": {
@@ -198,13 +203,15 @@
       "name": "Bachelor of Science and Arts"
     }
   },
-  "renderMethod": [{
-    "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
-    "type": "OverlayCaptureBundle",
-    "bundleVersion": "1.0,
-    "overlayNames": ["information", "label", "cardinality", "mapping"],
-    "supportedLanguages": ["en", "fr"]
-  }]
+  "renderMethod": [
+    {
+      "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
+      "type": "OverlayCaptureBundle",
+      "bundleVersion": "1.0",
+      "overlayNames": [ "information", "label", "cardinality", "mapping" ],
+      "supportedLanguages": [ "en", "fr" ]
+    }
+  ]
 }
 </pre>
 <pre class="example" title="JSON Paths">
@@ -262,22 +269,22 @@ $.renderMethod[0].language[1]
         "$.credentialSubject.degree.name": "Le nom du Diplôme obtenu par le sujet."
       }
     },
-	{
-	   "capture_base":"EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis",
-	   "type":"spec/overlays/label/1.0",
-	   "language":"en",
-	   "attribute_labels":{
-	      "$.credentialSubject.degree.name":"Degree Name",
-	   }
-	},
-	{
-	   "capture_base":"EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis",
-	   "type":"spec/overlays/label/1.0",
-	   "language":"fr",
-	   "attribute_labels":{
-	      "$.credentialSubject.degree.name":"Nom du diplôme",
-	   }
-	},
+    {
+      "capture_base": "EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis",
+      "type": "spec/overlays/label/1.0",
+      "language": "en",
+      "attribute_labels": {
+        "$.credentialSubject.degree.name": "Degree Name"
+      }
+    },
+    {
+      "capture_base": "EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis",
+      "type": "spec/overlays/label/1.0",
+      "language": "fr",
+      "attribute_labels": {
+        "$.credentialSubject.degree.name": "Nom du diplôme"
+      }
+    },
     {
       "capture_base": "Ev_RaB-gIOn8VAB3sg40mINxjiYRxdLVQrgce0aZbFcc",
       "type": "spec/overlays/cardinality/1.0",
