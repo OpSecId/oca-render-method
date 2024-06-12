@@ -83,16 +83,6 @@
       <h2>Data Model</h2>
       <p> The following sections outline the data model that is used by this specification for rendering methods </p>
       <section>
-        <h3>The `renderMethod` Property</h3>
-        <p> The `renderMethod` property is a <a href="https://www.w3.org/TR/vc-data-model-2.0/#reserved-extension-points"> reserved extension point</a> in the Verifiable Credentials Data Model specification [[VC-DATA-MODEL-2.0]]. An <a>issuer</a> can utilize this property in a <a>verifiable credential</a> to express one or more preferred render methods. </p>
-        <dl>
-          <dt>
-            <var>renderMethod</var>
-          </dt>
-          <dd> The value of the `renderMethod` property MUST specify one or more rendering methods that can be used by software to express the <a>verifiable credential</a> using a visual, auditory, or haptic mechanism. Each `renderMethod` value MUST specify its `type`, for example, `OverlayCaptureBundle`. The precise contents of each rendering hint is determined by the specific `renderMethod` `type` definition. </dd>
-        </dl>
-      </section>
-      <section>
         <h4>OverlayCaptureBundle</h4>
         <p> When an <a>issuer</a> desires to specify an OCA Bundle for a <a>verifiable credential</a>, they MAY add a `renderMethod` property that uses the data model described below. </p>
         <table class="simple">
@@ -148,7 +138,28 @@
       <h2>Overlay Capture Architecture Bundles</h2>
       <p class="issue" title="Summary of Security Considerations"></p>
       <h3>Capture Base</h3>
+<pre class="example json" title="Capture Base">
+{
+   "type":"spec/capture_base/1.0",
+   "classification":"",
+   "attributes":{
+	"$.credentialSubject.degree.name": "Text"
+   },
+   "flagged_attributes":[]
+}
+</pre>
       <h3>Bound Overlays</h3>
+<pre class="example json" title="Bound Overlay">
+{
+   "capture_base":"EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis",
+   "type":"spec/overlays/information/1.0",
+   "language":"en",
+   "attribute_information":{
+	"$.credentialSubject.degree.name": "The name of the degree."
+   }
+}
+</pre>
+	    
     </section>
     <section id="algorithms">
       <h2>Algorythms</h2>
