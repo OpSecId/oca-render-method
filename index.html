@@ -9,6 +9,7 @@
       var respecConfig = {
         specStatus: "ED",
 	shortName: "oca-render-method",
+	group: "credentials",
         editors: [
 		{ 
 			name: "Patrick St-Louis", 
@@ -27,6 +28,7 @@
 	],
         github: "https://github.com/opsecid/oca-render-method/",
 	maxTocLevel: 4,
+	lint: {"no-unused-dfns": false},
       };
     </script>
   </head>
@@ -79,7 +81,7 @@
           <tbody>
             <tr>
               <td>id</td>
-              <td> A URL that dereferences to an JSON document [[JSON]] with a valid SAID [[SAID]] file name. </td>
+              <td> A URL that dereferences to an JSON document [[JSON]] with a valid <a href="https://datatracker.ietf.org/doc/html/draft-ssmith-said">SAID</a> file name. </td>
             </tr>
             <tr>
               <td>type</td>
@@ -127,7 +129,7 @@
       <h3>Capture Base</h3>
       <h3>Bound Overlays</h3>
     </section>
-    <section>
+    <section id="algorithms">
       <h2>Algorythms</h2>
       <p class="issue" title="Algorythms"></p>
 	<h3>Flatten VC</h3>
