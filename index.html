@@ -95,7 +95,7 @@
    </head>
    <body>
       <section id="abstract">
-         <p> This specification describes mechanisms to apply the Overlay Capture Architecture to Verifiable Credentials as a Render Method. </p>
+         <p> This specification describes mechanisms to apply the Overlays Capture Architecture to Verifiable Credentials as a Render Method. </p>
       </section>
       <section id="sotd">
          <p> This is an experimental specification and is undergoing regular revisions. It is not fit for production deployment. </p>
@@ -119,7 +119,7 @@
          <h2>Data Model</h2>
          <p> The following sections outline the data model that is used by this specification for rendering methods </p>
          <section>
-            <h3>OverlayCaptureBundle Entry</h3>
+            <h3>OverlaysCaptureBundle Entry</h3>
             <p> When an <a>issuer</a> desires to specify an OCA Bundle for a <a>verifiable credential</a>, they MAY add a `renderMethod` property that uses the data model described below. </p>
             <table class="simple">
                <thead>
@@ -135,7 +135,7 @@
                   </tr>
                   <tr>
                      <td>type</td>
-                     <td> The <code>type</code> property MUST be <code>OverlayCaptureBundle</code>. </td>
+                     <td> The <code>type</code> property MUST be <code>OverlaysCaptureBundle</code>. </td>
                   </tr>
                   <tr>
                      <td>bundleVersion</td>
@@ -143,7 +143,7 @@
                   </tr>
                   <tr>
                      <td>overlayNames</td>
-                     <td> The overlay names provided by the issuer. These strings MUST map to an overlay's type after pairing it with the version like so "spec/overlay/{overlayName}/{version}". </td>
+                     <td> The overlay names provided by the issuer. These strings MUST map to an overlay's type after pairing it with the version like so "spec/overlays/{overlayName}/{version}". </td>
                   </tr>
                   <tr>
                      <td>supportedLanguages</td>
@@ -152,12 +152,12 @@
                </tbody>
             </table>
             <p> An entry of the data model shown above is expressed in a <a>renderMethod</a> section in the example below. </p>
-            <pre class="example json" title="OverlayCaptureBundle Entry">
+            <pre class="example json" title="OverlaysCaptureBundle Entry">
 {
   "renderMethod": [
     {
       "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
-      "type": "OverlayCaptureBundle",
+      "type": "OverlaysCaptureBundle",
       "bundleVersion": "1.0",
       "overlayNames": [ "information", "label", "cardinality", "mapping" ],
       "supportedLanguages": [ "en", "fr" ]
@@ -168,7 +168,7 @@
             <p> In the example above, the <a>issuer</a> has provided an OCA Bundle for a bachelor's degree that will provide additional information to the <a>verifiable credential</a>.</p>
          </section>
          <section>
-            <h2>OverlayCaptureBundle Object</h2>
+            <h2>OverlaysCaptureBundle Object</h2>
             <p>An OCA bundle consists of a Capture Base and a series of cryptographically bound Overlays.</p>
             <h3>Capture Base</h3>
             <pre class="example json" title="Capture Base">
@@ -249,7 +249,7 @@
   "renderMethod": [
     {
       "id": "https://oca.opsec.id/bundles/EVyoqPYxoPiZOneM84MN-7D0oOR03vCr5gg1hf3pxnis.json",
-      "type": "OverlayCaptureBundle",
+      "type": "OverlaysCaptureBundle",
       "bundleVersion": "1.0",
       "overlayNames": [ "information", "label", "cardinality", "mapping" ],
       "supportedLanguages": [ "en", "fr" ]
